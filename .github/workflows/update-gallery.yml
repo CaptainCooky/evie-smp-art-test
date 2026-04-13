@@ -1,0 +1,27 @@
+name: Update Gallery
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "images/**"
+
+permissions:
+  contents: write
+
+jobs:
+  rebuild-gallery:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Regenerate index.html
+        run: python3 .github/scripts/build_gallery.py
+
+      - name: Commit updated gallery
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet || git commit -m "chore: regenerate gallery [skip ci]"
+          git push
