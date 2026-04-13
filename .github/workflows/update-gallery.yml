@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - "images/**"
+      - "!index.html"
 
 permissions:
   contents: write

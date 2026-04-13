@@ -30,7 +30,7 @@ def get_images(folder: Path) -> list[str]:
 def render_category(slug: str, title: str, url_prefix: str) -> str:
     images = get_images(IMAGES_DIR / slug)
     lines = [
-        f'  <h2>{title} \u2014 <code>{url_prefix}</code></h2>',
+        f'  <h2>{title} — <code>{url_prefix}</code></h2>',
         f'  <div class="gallery" id="{slug}">',
     ]
     if images:
